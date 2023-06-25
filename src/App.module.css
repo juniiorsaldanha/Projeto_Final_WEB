@@ -22,6 +22,8 @@
 
 .Side__Container{
     display: flex;
+    /* position: fixed; */
+    
     gap: 19px; 
     flex-direction: column;
 }

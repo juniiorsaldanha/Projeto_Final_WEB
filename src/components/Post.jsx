@@ -24,20 +24,11 @@ export function Post({ author, publishedAt, content }){
         addSuffix: true
     })
 
-    function handleCreateNewComment() {
-        preventDefault();
+    function handleCreateNewComment(e) {
+        e.preventDefault();
 
         setComments([...comments, newCommentText]);
         setNewCommentText('');
-    }
-
-    function handleNewCommentChange(){
-        target.setCustomValidity('');
-        setNewCommentText(target.value);
-    }
-
-    function handleNewCommentInvalid(){
-        target.setCustomValidity('Esse campo é obrigatório!');
     }
 
     function deleteComment(commentToDelete){
@@ -78,15 +69,14 @@ export function Post({ author, publishedAt, content }){
                })}
             </div>
 
-            <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
+            <form onSubmit={(e) => handleCreateNewComment(e)} className={styles.commentForm}>
                 <strong>Deixe seu Feedback</strong>
 
                 <textarea 
                     name='comment'
                     placeholder='Deixe um comentário'
                     value={newCommentText}
-                    onChange={handleNewCommentChange}
-                    onInvalid={handleNewCommentInvalid}
+                    onChange={(e) => setNewCommentText(e.target.value)}
                     required
                 />
                 <footer>

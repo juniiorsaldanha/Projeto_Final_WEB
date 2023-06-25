@@ -1,10 +1,11 @@
 .container {
-    background: rgb(7, 7, 133);
+    background: var(--white);
+    color: var(--gray-900);
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid var(--gray-400);
+    border-radius: 10px;
   }
   
   .question {
@@ -19,6 +20,8 @@
   
   .options input[type="radio"] {
     margin-right: 5px;
+    box-shadow: none;
+    border: none;
   }
   
   .options label {
@@ -27,14 +30,21 @@
   
   .submit {
     padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
+    background-color: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 9999px;
+    color: var(--white);
     cursor: pointer;
   }
-  
-  .submit:hover {
-    background-color: #0056b3;
+
+  .submit:disabled {
+    cursor: not-allowed;
+    background-color: var(--gray-400);
+    border: 1px solid var(--gray-400);
   }
+  
+  /* .submit:hover {
+    background-color: var(--white);
+    color: var(--blue);
+  } */
   

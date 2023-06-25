@@ -24,7 +24,7 @@ export function Sidebar(){
                     <PencilLine size={20}/>
                     Editar seu perfil
                 </a>
-                <br />
+                <br />  
                 <a href="#">
                     <UserSwitch size={20} />
                     Trocar Perfil

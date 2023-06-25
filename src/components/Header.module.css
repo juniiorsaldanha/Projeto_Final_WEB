@@ -1,8 +1,8 @@
 .header{
-    background: rgb(18, 18, 218);
+    background: var(--blue);
     display: flex;
     justify-content: center;
-    padding: 1.25rem 0;
+    padding: 1rem 0;
 }
 
 .header img{
