@@ -44,7 +44,11 @@ export function App() {
     <div>
       <Header />
       <div className={styles.wrapper}>
-        <Sidebar /> 
+        <div className="Side___Container">
+          <Sidebar /> 
+          <Poll />
+        </div>
+        
           <main>
             {posts.map(post => {
               return (
@@ -58,9 +62,7 @@ export function App() {
             })}
           </main>
         </div>
-        <div className={styles.wrapper}>
-          <Poll />
-        </div>
+        <div className={styles.w}></div>
       </div>
   )
 }
