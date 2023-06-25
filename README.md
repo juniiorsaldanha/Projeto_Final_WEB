@@ -1,5 +1,5 @@
-## Projeto Final de WEB 
-# Site interativo do RU 
+# Projeto Final de WEB 
+## Site interativo do RU 
 - Francisco Geovan
 - Thiago Martins 
 - Vinicius Moreira
