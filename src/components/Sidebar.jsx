@@ -1,5 +1,6 @@
 import { PencilLine } from "phosphor-react"
 import { UserSwitch } from "phosphor-react"
+import { ForkKnife } from "phosphor-react"
 import { Avatar } from "./Avatar";
 
 import styles from "./Sidebar.module.css";
@@ -21,14 +22,18 @@ export function Sidebar(){
 
             <footer>
                 <a href="#">
+                    <ForkKnife size={20} />
+                    Cardápio
+                </a>
+                <a href="#">
                     <PencilLine size={20}/>
                     Editar seu perfil
-                </a>
-                <br />  
+                </a>     
                 <a href="#">
                     <UserSwitch size={20} />
                     Trocar Perfil
                 </a>
+
             </footer>
         </aside>
     );
