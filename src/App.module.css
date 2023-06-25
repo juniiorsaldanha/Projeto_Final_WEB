@@ -19,3 +19,9 @@
         grid-template-columns: 1fr;
     }
 }
+
+.Side__Container{
+    display: flex;
+    gap: 19px; 
+    flex-direction: column;
+}

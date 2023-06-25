@@ -44,7 +44,7 @@ export function App() {
     <div>
       <Header />
       <div className={styles.wrapper}>
-        <div className="Side___Container">
+        <div className={styles.Side__Container}>
           <Sidebar /> 
           <Poll />
         </div>
