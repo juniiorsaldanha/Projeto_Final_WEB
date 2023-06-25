@@ -3,6 +3,8 @@
     border-radius: 8px;
     border: 1px solid var(--gray-400);
     overflow: hidden;
+    max-width: 256px;
+    min-width: 256px;
 }
 
 .cover{

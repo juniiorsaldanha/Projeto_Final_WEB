@@ -27,3 +27,10 @@
     gap: 19px; 
     flex-direction: column;
 }
+
+@media (max-width: 768px){
+    .Side__Container{
+        width: 100%;
+        flex-direction: row;
+    }
+}
