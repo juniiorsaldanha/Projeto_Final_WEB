@@ -1,14 +1,14 @@
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
 import { useState } from 'react'
-import {api} from '../api/index'
+import { ThumbsUp } from 'phosphor-react'
 
 import { Avatar } from './Avatar'
 import { Comment } from './Comment'
 
 import styles from './Post.module.css'
 
-export function Post({ author, publishedAt, content, comments }){
+export function Post({ author, publishedAt, quantityLikes, content, comments, onDelete, onCreate, onLiked }){
     const [newCommentText, setNewCommentText] = useState('');
 
     const publishedDateFormatted = format(new Date(publishedAt), "d 'de' LLLL 'às' HH:mm'h'", {
@@ -20,16 +20,16 @@ export function Post({ author, publishedAt, content, comments }){
         addSuffix: true
     })
 
-    function handleCreateNewComment(e) {
-        // falta
+    function handleCreateComment() {
+        onCreate(newCommentText, author.post_id)
     }
 
     async function deleteComment(comment_id){
-        await api.delete('/post/comment', {
-            data: {
-                comment_id
-            }
-        });
+        onDelete(comment_id)
+    }
+
+    async function handleLikePost(){
+        onLiked(author.post_id)
     }
 
     const isNewCommentEmpty = newCommentText.length === 0;
@@ -54,7 +54,12 @@ export function Post({ author, publishedAt, content, comments }){
                 <p>{content}</p>
             </div>
 
-            <form onSubmit={(e) => handleCreateNewComment(e)} className={styles.commentForm}>
+            <form onSubmit={handleCreateComment} className={styles.commentForm}>
+                <span onClick={handleLikePost}>
+                    <ThumbsUp />
+                    Aplaudir <span>{quantityLikes}</span>
+                </span>
+
                 <strong>Deixe seu Feedback</strong>
 
                 <textarea 
@@ -76,8 +81,9 @@ export function Post({ author, publishedAt, content, comments }){
                     return (
                         <Comment 
                             key={comment.id}
-                            comment={comment} 
-                            onDeleteComment={deleteComment} 
+                            comment={comment}
+                            onDeleteComment={deleteComment}
+                            isAdmin={author.role}
                         />
                     )
                 })}

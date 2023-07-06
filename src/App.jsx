@@ -1,95 +1,79 @@
-import React, { useState, useEffect } from 'react'
-import { Header } from "./components/Header"
-import { Post } from "./components/Post"
-import { Sidebar } from "./components/Sidebar";
-import { Poll } from './components/Poll';
-import styles from "./App.module.css";
-import {api} from './api/index'
+import React, { useState } from "react";
+import { Input } from "./components/Input";
+import api from './api/index'
+import { useNavigate} from 'react-router-dom'
 
-import './global.css' 
+import 
+  styles
+ from "./app.module.css";
 
+import Logo from './assets/Brasao_ufc.svg'
 
-// const posts = [
-//   {
-//     id: 1,
-//     author: {
-//       avatarUrl: 'https://github.com/juniiorsaldanha.png',
-//       name: 'Junior Saldanha',
-//       role: 'Administrador'
-//     },
-//     content: [
-//         { type: 'paragraph', content: 'Fala galeraa 👋' },
-//         { type: 'paragraph', content: 'O cardápio da semana já está disponível no link abaixo: '},
-//         { type: 'link', content: 'https://github.com/juniiorsaldanha' } ,
-//     ],
-//     publishedAt: new Date('2023-06-23 20:00:00'),
-//   },
-//   {
-//     id: 2,
-//     author: {
-//       avatarUrl: 'https://github.com/esthiago.png',
-//       name: 'Thiago Martins',
-//       role: 'Estagiário'
-//     },
-//     content: [
-//         { type: 'paragraph', content: 'Fala galeraa 👋' },
-//         { type: 'paragraph', content: 'Votem na comida preferida de vocês, A vencedora será a comida escolhida para o jantar de Sexta-feira: '},
-//         { type: 'pool', content: 'arroz' } ,
-//     ],
-//     publishedAt: new Date('2023-06-30 20:00:00'),
-//   }
-// ]
+export default function App() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isErrorEmail, setIsErrorEmail] = useState(false);
+  const [isErrorPassword, setIsErrorPassword] = useState(false);
 
-export function App() {
+const navigate = useNavigate()
 
-  const [posts, setPosts] = useState([])
-
-    useEffect(() => {
-      async function loadPost() {
-        const response = await api.get('/post')
-
-        setPosts(response.data)
-      }
-
-      loadPost()
-    }, [])
-    
-  return (
-    <div>
-      <Header />
-      <div className={styles.wrapper}>
-        <div className={styles.Side__Container}>
-          <Sidebar /> 
-          <Poll />
-        </div>
+  async function handleSunmit(e) {
+    e.preventDefault()
+    await api.post('session', {
+      email,
+      password
+    }).then(resp => {
+      if (resp.status === 200){
+        const { token, user } = resp.data
         
-          <main>
-            {posts.map(post => {
-              const author = {
-                avatarUrl: post.user.urlAvatar,
-                name: post.user.name,
-                role: post.user.admin ? 'administrador' : 'Aluno'
-              }
+        localStorage.setItem('tokenRUGRAM', token)
+        localStorage.setItem('userDATA', JSON.stringify(user))
+        navigate("/home")
+      }
+    });
+  }
 
-              const comments = post.Comment;
-
-              const content = post.content;
-
-              const publishedAt = post.created_at;
-              return (
-                <Post
-                  key={post.id}
-                  author={author}
-                  content={content}
-                  publishedAt={publishedAt}
-                  comments={comments}
-                />
-              )
-            })}
-          </main>
-        </div>
-        <div className={styles.w}></div>
+  return (
+    <main className={styles.Container}>
+      <div className={styles.ContainerImage}>
+        <img src={Logo} alt="image" />
       </div>
-  )
-}
+      <div className={styles.Content}>
+        <h1>Bem Vindo!</h1>
 
+        <form className={styles.Form}>
+          <Input
+            labelText="Email"
+            InputType="text"
+            disabled={false}
+            isRequired
+            name="Email"
+            onChange={setEmail}
+            placeholder="Digite seu email"
+            value={email}
+            mask=""
+            isErrorState={isErrorEmail}
+            setErrorState={setIsErrorEmail}
+          />
+
+          <Input
+            labelText="Password"
+            InputType="password"
+            disabled={false}
+            isRequired
+            name="password"
+            onChange={setPassword}
+            placeholder="Digite sua senha"
+            value={password}
+            mask=""
+            isErrorState={isErrorPassword}
+            setErrorState={setIsErrorPassword}
+          />
+
+            <button className={styles.Button} onClick={handleSunmit}>Login</button>
+
+        </form>
+      </div>
+    </main>
+  );
+}

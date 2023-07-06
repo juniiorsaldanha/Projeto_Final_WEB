@@ -1,22 +1,17 @@
 import styles from './Comment.module.css'
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
-import { Trash, ThumbsUp } from 'phosphor-react'
+import { Trash } from 'phosphor-react'
 import { Avatar } from './Avatar'
-import { useState } from 'react';
 
-export function Comment({ comment, onDeleteComment }){
-    const [likeCount, setLikeCount] = useState(0);
-
+export function Comment({ isAdmin, comment, onDeleteComment }){
     function handleDeleteComment(){
-        onDeleteComment(comment.id);
-    }
-
-    function handleLikeComment(){
-        setLikeCount((state) => {
-            return state + 1;
-        }); 
-        // falta o like
+        const user = JSON.parse(localStorage.getItem('userDATA'))
+        if (user.admin){
+            onDeleteComment(comment.id);
+        }
+        else
+            alert("Somente administrador podem deletar mensagens!")
     }
 
     const publishedDateFormatted = format(new Date(comment.created_at), "d 'de' LLLL 'às' HH:mm'h'", {
@@ -36,7 +31,7 @@ export function Comment({ comment, onDeleteComment }){
                 <div className={styles.commentContent}>
                     <header>
                         <div className={styles.authorAndTime}>
-                            <strong>{comment.user.name}</strong>
+                            <strong>{comment.user.username}</strong>
                             <time title={publishedDateFormatted} dateTime={comment.created_at}>{publishedDateRelativeToNow}</time>
                         </div>
 
@@ -48,12 +43,6 @@ export function Comment({ comment, onDeleteComment }){
                     <p>{comment.content}</p>
                 </div>
 
-                <footer>
-                    <button onClick={handleLikeComment}>
-                        <ThumbsUp />
-                        Aplaudir <span>{likeCount}</span>
-                    </button>
-                </footer>
             </div>
 
         </div>
