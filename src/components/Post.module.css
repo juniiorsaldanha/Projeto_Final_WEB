@@ -80,7 +80,8 @@
 
 
 .commentForm span{
-    background: transparent;
+    width: 70px;
+    user-select: none;
     box-shadow: none;
     border: none;
     color: var(--blue);

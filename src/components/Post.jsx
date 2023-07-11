@@ -57,7 +57,7 @@ export function Post({ author, publishedAt, quantityLikes, content, comments, on
             <form onSubmit={handleCreateComment} className={styles.commentForm}>
                 <span onClick={handleLikePost}>
                     <ThumbsUp />
-                    Aplaudir <span>{quantityLikes}</span>
+                    Curtir <span>{quantityLikes}</span>
                 </span>
 
                 <strong>Deixe seu Feedback</strong>

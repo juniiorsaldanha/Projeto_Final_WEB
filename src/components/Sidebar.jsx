@@ -40,7 +40,7 @@ export function Sidebar(){
             </div>
 
             <footer>
-                <a href="https://www.ufc.br/restaurante/cardapio/1-restaurante-universitario-de-fortaleza">
+                <a href="https://www.ufc.br/restaurante/cardapio/3-restaurante-universitario-de-russas">
                     <ForkKnife size={20} />
                     Cardápio
                 </a>   

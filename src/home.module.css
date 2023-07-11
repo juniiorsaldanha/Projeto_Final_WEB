@@ -34,3 +34,65 @@
         flex-direction: row;
     }
 }
+
+.ContainerPost {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+.ContainerPost section img {
+    margin-top: 16px;
+    width: 60px;
+    height: 60px;
+}
+
+.ContentPost {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin-left: 30px;
+    position: relative;
+}
+
+.ContentPost textarea{
+    background: var(--white);
+    border: 1px solid var(--gray-400);
+    resize: none;
+    height: 6rem;
+    padding: 1rem;
+    border-radius: 8px;
+    color: var(--gray-900);
+    line-height: 1.4;
+    margin-top: 1rem;
+    padding-right: 100px;
+    overflow-y: hidden;
+}
+
+.ContentPost button {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 80px;
+    font-size: 14px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 0;
+    border-radius: 9999px;
+    background: var(--blue);
+    color: var(--white);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+.ContentPost button:not(:disabled):hover{
+    background: var(--blue);
+}
+
+.ContentPost button:disabled{
+    opacity: 0.7;
+    background-color: var(--gray-400);
+    cursor: not-allowed;
+}
